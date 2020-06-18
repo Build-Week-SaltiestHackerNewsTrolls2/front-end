@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import {Input} from "@material-ui/core"
+import {Input, Paper, Container} from "@material-ui/core"
 import '../App.css'
+import axiosWithAuth from "../utils/axiosWithAuth"
 
 const initinalUser={
   username: "",
@@ -21,17 +22,28 @@ const handleChange = e => {
 
 const handleSubmit = e => {
   e.preventDefault();
+  axiosWithAuth()
+    .post("", user)
+    .then(res => console.log(res))
+    .catch(err => console.log(err.message))
   
 }
 
   return(
+    <Container maxWidth="sm">
     <div className="loginContainer">
+      
+      <Paper>
+        <label>Login</label>
       <form onSubmit={handleSubmit}>
         <Input name="username" value={user.username} onChange={handleChange} placeholder="Username" />
         <br></br>
         <Input name="password" value={user.password} onChange={handleChange} placeholder="Password" />
       </form>
+      </Paper>
+      
     </div>
+    </Container>
   )
 }
 
