@@ -26,6 +26,7 @@ const handleSubmit = e => {
     .post("/auth/login", user)
     .then(res => {
       localStorage.setItem('token', res.data.token);
+      props.history.push("/commentList")
       console.log(res);
     })
     .catch(err => console.log(err.message))
