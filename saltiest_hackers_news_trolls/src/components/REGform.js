@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card, Form, FormGroup, Input, Button, Dropdown, DropdownToggle} from 'reactstrap'
 import axios from 'axios'
 import * as yup from 'yup'
 
-const Form = () => {
+const REGForm = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [formData, setformData] = useState({
         firstName: '',
@@ -27,8 +27,8 @@ const Form = () => {
     const validatation = yup.object().shape({
         firstName: yup.string().required(),
         lastName: yup.string().required(),
-        email: yup.required().string(),
-        password: yup.required().string()
+        email: yup.string().required(),
+        password: yup.string().required()
     })
 
     const submit = () => {
@@ -44,7 +44,7 @@ const Form = () => {
     }
     return(
         <>
-        <Card style={{ color: red }}>
+        <Card style={{ color: "red" }}>
             <h2 style={{color: 'white', margin: '0 auto'}}>
                 Enter Your Information
             </h2>
@@ -93,4 +93,4 @@ const Form = () => {
     )
 }
 
-export default Form;
+export default REGForm;
