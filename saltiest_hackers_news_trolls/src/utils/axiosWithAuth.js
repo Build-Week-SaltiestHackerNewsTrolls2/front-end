@@ -4,11 +4,11 @@ const axiosWithAuth = () => {
   const token = localStorage.getItem('token');
 
   return axios.create({
+    baseURL: "https://troll-hub.herokuapp.com/api",
     headers: {
-      BaseURL: "https://troll-hub.herokuapp.com/api",
       Authorization: token
     }
-  })
+  });
 };
 
 export default axiosWithAuth;

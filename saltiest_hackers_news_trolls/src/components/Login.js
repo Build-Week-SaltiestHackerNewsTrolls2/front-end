@@ -4,7 +4,7 @@ import '../App.css'
 import axiosWithAuth from "../utils/axiosWithAuth"
 
 const initinalUser={
-  username: "",
+  email: "",
   password: "",
 }
 
@@ -23,9 +23,10 @@ const handleChange = e => {
 const handleSubmit = e => {
   e.preventDefault();
   axiosWithAuth()
-    .post("auth/register", user)
+    .post("/auth/login", user)
     .then(res => {
-      localStorage.setItem('token', res.data.payload)
+      localStorage.setItem('token', res.data.token);
+      console.log(res);
     })
     .catch(err => console.log(err.message))
   
@@ -38,11 +39,11 @@ const handleSubmit = e => {
       <Paper>
         <label>Login</label>
       <form onSubmit={handleSubmit}>
-        <Input name="username" value={user.username} onChange={handleChange} placeholder="Username" />
+        <Input name="email" value={user.email} onChange={handleChange} placeholder="Username" />
         <br></br>
         <Input name="password" value={user.password} onChange={handleChange} placeholder="Password" />
         <br></br>
-        <Button>Sign Up</Button>
+        <Button type="submit">Sign In</Button>
       </form>
       </Paper>
       
