@@ -5,6 +5,7 @@ const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
+      BaseURL: "https://troll-hub.herokuapp.com/api",
       Authorization: token
     }
   })
