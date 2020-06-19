@@ -10,7 +10,7 @@ const initinalUser={
 
 
 
-const Login = () => {
+const Login = props => {
 const [user, setUser] = useState(initinalUser)
 
 const handleChange = e => {
@@ -44,6 +44,7 @@ const handleSubmit = e => {
         <Input name="password" value={user.password} onChange={handleChange} placeholder="Password" />
         <br></br>
         <Button type="submit">Sign In</Button>
+        <Button onClick={() =>{props.history.push("/reg")}}>Sign Up</Button>
       </form>
       </Paper>
       

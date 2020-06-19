@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <Router>
       <Switch>
-        <Route path="/" component={Login} />
-        <Route path="/reg" component={REGForm} />
+        <Route exact path="/" component={Login} />
+        <Route exact path="/reg" component={REGForm} />
       </Switch>
       </Router>
     </div>

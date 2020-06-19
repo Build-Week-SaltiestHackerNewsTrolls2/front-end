@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Card, Form, FormGroup, Input, Button, Dropdown, DropdownToggle} from 'reactstrap'
 import axios from 'axios'
 import * as yup from 'yup'
+import axiosWithAuth from '../utils/axiosWithAuth'
 
 const REGForm = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -33,7 +34,9 @@ const REGForm = () => {
 
     const submit = () => {
         validatation.validate(formData).then(() => {
-            axios.post('', formData).then((res) => {
+            axiosWithAuth()
+              .post('/auth/register', formData)
+              .then((res) => {
                 console.log("This is your data", res.data)
             })
         })
