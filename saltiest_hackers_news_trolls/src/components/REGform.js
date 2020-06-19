@@ -4,6 +4,7 @@ import axios from 'axios'
 import * as yup from 'yup'
 
 const Form = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [formData, setformData] = useState({
         firstName: '',
         lastName: '',
@@ -22,7 +23,7 @@ const Form = () => {
                 console.log('No go', error);
             });
     }, []);
-
+    const toggle = () => setDropdownOpen((prevState) => !prevState)
     const validatation = yup.object().shape({
         firstName: yup.string().required(),
         lastName: yup.string().required(),
