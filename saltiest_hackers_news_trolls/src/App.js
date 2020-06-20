@@ -1,24 +1,51 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Login from "./components/Login"
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import REGForm from "./components/REGform"
 import PrivateRoute from "./components/PrivateRoute"
 import CommentList from "./components/CommentList"
 import {CommentContext} from "./contexts/CommentContext"
+import axiosWithAuth from './utils/axiosWithAuth';
+import ButtonAppBar from './components/ButtonAppBar';
 
 function App() {
-  const [comments, setcomments] = useState()
+  const [comments, setComments] = useState([])
+  const [isLog, setIsLog] = useState(false)
+  const fetchComments = () => {
+    axiosWithAuth()
+      .get('https://my.api.mockaroo.com/comments?key=20889c20')
+      .then(res => {
+        setComments(res.data)
+        console.log(res.data)
+      })
+
+  }
+
+  const isLogin = () => {
+    if(localStorage.getItem('token'))
+      return(setIsLog(true))
+    else
+      return(setIsLog(false))
+    
+  
+}
+
+  useEffect(() => {
+    fetchComments()
+  }, [])
+
   return (
     <CommentContext.Provider value={comments}>
       <div className="App">
-        <Router>
+        <ButtonAppBar isLogin={isLogin} isLog={isLog} />
           <Switch>
-            <PrivateRoute path="/CommentList" component={CommentList} />
-            <Route exact path="/reg" component={REGForm} />
-            <Route exact path="/" component={Login} />
+            <PrivateRoute exact path="/CommentList" component={CommentList} />
+            {/* <Route exact path="/reg" component={REGForm} /> */}
+            <Route exact path="/" >
+              <Login isLogin={isLogin} />
+            </Route>
           </Switch>
-        </Router>
       </div>
     </CommentContext.Provider>
   );

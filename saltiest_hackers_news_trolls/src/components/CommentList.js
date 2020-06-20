@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useContext } from "react"
+import { CommentContext } from "../contexts/CommentContext";
+import CommentCard from "./CommentCard"
 
 
 const CommentList = () => {
+  const comments = useContext(CommentContext)
   return(
-    <p>commentList you should be signed in.</p>
+    <div>
+      List of Comments
+      {comments.map(comment => {
+        return(
+          <CommentCard key={comment.id} comment={comment} />
+      )})}
+    </div>
+    
   )
 }
 
