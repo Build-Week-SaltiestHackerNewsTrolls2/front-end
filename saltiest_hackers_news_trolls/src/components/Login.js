@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Input, Paper, Container, Button} from "@material-ui/core"
 import '../App.css'
 import axiosWithAuth from "../utils/axiosWithAuth"
+import {useHistory} from "react-router-dom"
 
 const initinalUser={
   email: "",
@@ -12,6 +13,7 @@ const initinalUser={
 
 const Login = props => {
 const [user, setUser] = useState(initinalUser)
+const history = useHistory()
 
 const handleChange = e => {
   setUser({
@@ -26,8 +28,9 @@ const handleSubmit = e => {
     .post("/auth/login", user)
     .then(res => {
       localStorage.setItem('token', res.data.token);
-      props.history.push("/commentList")
+      history.push("/commentList")
       console.log(res);
+      props.isLogin()
     })
     .catch(err => console.log(err.message))
   
@@ -36,16 +39,16 @@ const handleSubmit = e => {
   return(
     <Container maxWidth="sm">
     <div className="loginContainer">
-      {localStorage.getItem("token") && props.history.push("/commentList")}
+      {localStorage.getItem("token") && history.push("/commentList")}
       <Paper>
         <label>Login</label>
       <form onSubmit={handleSubmit}>
         <Input name="email" value={user.email} onChange={handleChange} placeholder="Username" />
         <br></br>
-        <Input name="password" value={user.password} onChange={handleChange} placeholder="Password" />
+        <Input name="password" type="password" value={user.password} onChange={handleChange} placeholder="Password" />
         <br></br>
         <Button type="submit">Sign In</Button>
-        <Button onClick={() =>{props.history.push("/reg")}}>Sign Up</Button>
+        <Button onClick={() =>{history.push("/reg")}}>Sign Up</Button>
       </form>
       </Paper>
       

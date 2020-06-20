@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Form, FormGroup, Input, Button, Dropdown, DropdownToggle} from 'reactstrap'
+import { Card, Form, FormGroup, Input, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
 import axios from 'axios'
 import * as yup from 'yup'
 import axiosWithAuth from '../utils/axiosWithAuth'
@@ -36,9 +36,8 @@ const REGForm = () => {
         validatation.validate(formData).then(() => {
             axiosWithAuth()
               .post('/auth/register', formData)
-              .then((res) => {
-                console.log("This is your data", res.data)
-            })
+              .then(res => console.log("This is your post data", res.data))
+              .catch(err => console.log('This is your post error', err.message))
         })
     }
 
@@ -68,24 +67,27 @@ const REGForm = () => {
                 <Input type='text' name='lastName' placeholder='Please enter your last name here' value={formData.lastName} onChange={handleChange}/>
             </FormGroup>
 
-                     <FormGroup>
+                    <FormGroup>
                         <legend>Email</legend>
                         <Input type='email' name='email' placeholder='Please enter a vaild email' value={formData.email} onChange={handleChange}/>
                     </FormGroup>
 
                     <FormGroup>
                         <legend>Password</legend>
-                        <Input type='password' name='password' value='password' onChange={handleChange}/>
+                        <Input type='password' name='password' value={formData.password} onChange={handleChange}/>
                     </FormGroup>
 
                     <FormGroup>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle} value={formData.country} onChange={handleChange} >
+                <input type='select' isOpen={false} name="country" toggle={toggle} value={formData.country} onChange={handleChange} >
                     <DropdownToggle caret>
-                    {country.map(country => {
-                        return <option>{country.name}</option>;
-                        })}
+                      Select
                     </DropdownToggle>
-                </Dropdown>
+                    <DropdownMenu>
+                    {country.map((country, i) => {
+                        return <option key={i}>{country.name}</option>;
+                        })}
+                    </DropdownMenu>
+                </input>
             </FormGroup>
 
             <Button>
