@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Login from "./components/Login"
 import {Route, Switch} from 'react-router-dom';
-import REGForm from "./components/REGform"
-import PrivateRoute from "./components/PrivateRoute"
-import CommentList from "./components/CommentList"
-import {CommentContext} from "./contexts/CommentContext"
+import REGForm from "./components/REGform";
+import PrivateRoute from "./components/PrivateRoute";
+import CommentList from "./components/CommentList";
+import {CommentContext} from "./contexts/CommentContext.js";
 import axiosWithAuth from './utils/axiosWithAuth';
 import ButtonAppBar from './components/ButtonAppBar';
 
