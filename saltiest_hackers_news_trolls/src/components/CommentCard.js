@@ -9,6 +9,7 @@ const CommentCard = ({comment}) => {
       axiosWithAuth.post('', comment)
     )
   }
+  console.log()
   return(
     <Card min-width="sm">
       <h3>Comment</h3>

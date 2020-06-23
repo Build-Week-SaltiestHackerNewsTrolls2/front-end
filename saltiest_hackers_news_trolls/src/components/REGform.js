@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import axiosWithAuth from '../utils/axiosWithAuth'
 import { useHistory } from 'react-router-dom'
 
-const REGForm = () => {
+const REGForm = props => {
     const [formData, setformData] = useState({
         firstName: '',
         lastName: '',
@@ -37,8 +37,11 @@ const REGForm = () => {
             axiosWithAuth()
               .post('/auth/register', formData)
               .then(res => {
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user_id', res.data.user_id);
                 console.log("This is your post data", res.data)
                 history.push("/commentList")
+                props.isLogin()
               })
               .catch(err => console.log('This is your post error', err.message))
         })

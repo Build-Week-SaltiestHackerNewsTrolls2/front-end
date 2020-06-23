@@ -8,10 +8,12 @@ import CommentList from "./components/CommentList";
 import {CommentContext} from "./contexts/CommentContext.js";
 import axiosWithAuth from './utils/axiosWithAuth';
 import ButtonAppBar from './components/ButtonAppBar';
+import {UserContext} from './contexts/UserContext.js'
 
 function App() {
   const [comments, setComments] = useState([])
   const [isLog, setIsLog] = useState(false)
+  const [userLoged, setUserLoged] = useState({})
   const fetchComments = () => {
     axiosWithAuth()
       .get('https://my.api.mockaroo.com/comments?key=20889c20')
@@ -40,10 +42,12 @@ function App() {
       <div className="App">
         <ButtonAppBar isLogin={isLogin} isLog={isLog} />
           <Switch>
-            <PrivateRoute exact path="/CommentList" component={CommentList} />
-            <Route exact path="/reg" component={REGForm} />
+            <PrivateRoute exact path="/CommentList" component={CommentList}/>
+            <Route exact path="/reg"  >
+              <REGForm isLogin={isLogin}/>
+            </Route>
             <Route exact path="/" >
-              <Login isLogin={isLogin} />
+              <Login isLogin={isLogin} setUserLoged={setUserLoged} />
             </Route>
           </Switch>
       </div>
