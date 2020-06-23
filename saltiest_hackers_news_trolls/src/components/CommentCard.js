@@ -10,7 +10,7 @@ const CommentCard = ({comment}) => {
     )
   }
   return(
-    <Card>
+    <Card min-width="sm">
       <h3>Comment</h3>
       <span>{comment.comment}</span>
       <h4>Score</h4>

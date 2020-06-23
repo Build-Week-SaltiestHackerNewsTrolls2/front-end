@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Form, FormGroup, Input, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
+import { Card, Form, FormGroup, Input, Button} from 'reactstrap'
 import axios from 'axios'
 import * as yup from 'yup'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import { useHistory } from 'react-router-dom'
 
 const REGForm = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [formData, setformData] = useState({
         firstName: '',
         lastName: '',
@@ -14,6 +14,7 @@ const REGForm = () => {
         country: ''
     });
     const [country, setCountry] = useState([]);
+    const history = useHistory()
     useEffect(() => {
         axios
             .get(`https://restcountries.eu/rest/v2/all`)
@@ -24,7 +25,6 @@ const REGForm = () => {
                 console.log('No go', error);
             });
     }, []);
-    const toggle = () => setDropdownOpen((prevState) => !prevState)
     const validatation = yup.object().shape({
         firstName: yup.string().required(),
         lastName: yup.string().required(),
@@ -36,7 +36,10 @@ const REGForm = () => {
         validatation.validate(formData).then(() => {
             axiosWithAuth()
               .post('/auth/register', formData)
-              .then(res => console.log("This is your post data", res.data))
+              .then(res => {
+                console.log("This is your post data", res.data)
+                history.push("/commentList")
+              })
               .catch(err => console.log('This is your post error', err.message))
         })
     }
@@ -77,18 +80,15 @@ const REGForm = () => {
                         <Input type='password' name='password' value={formData.password} onChange={handleChange}/>
                     </FormGroup>
 
-                    <FormGroup>
-                <input type='select' isOpen={false} name="country" toggle={toggle} value={formData.country} onChange={handleChange} >
-                    <DropdownToggle caret>
-                      Select
-                    </DropdownToggle>
-                    <DropdownMenu>
+                
+                
+                <select name="country" value={formData.country} onChange={handleChange} >
                     {country.map((country, i) => {
-                        return <option key={i}>{country.name}</option>;
+                        return <option key={i} value={country.name}>{country.name}</option>
                         })}
-                    </DropdownMenu>
-                </input>
-            </FormGroup>
+                </select>
+                
+            
 
             <Button>
                 Submit

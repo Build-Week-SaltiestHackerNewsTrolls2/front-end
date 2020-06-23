@@ -41,7 +41,7 @@ function App() {
         <ButtonAppBar isLogin={isLogin} isLog={isLog} />
           <Switch>
             <PrivateRoute exact path="/CommentList" component={CommentList} />
-            {/* <Route exact path="/reg" component={REGForm} /> */}
+            <Route exact path="/reg" component={REGForm} />
             <Route exact path="/" >
               <Login isLogin={isLogin} />
             </Route>
