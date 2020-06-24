@@ -24,6 +24,7 @@ export default function ButtonAppBar({isLogin, isLog}) {
   useEffect(() => {
     isLogin()
   })
+  const id = localStorage.getItem('user_id')
 
   return (
     <div className={classes.root}>
@@ -35,6 +36,7 @@ export default function ButtonAppBar({isLogin, isLog}) {
           <Typography variant="h6" className={classes.title}>
             Troll Hub
           </Typography>
+          {isLog && <Link to={`/SavedComments/${id}`}><Button>Saved Comments</Button></Link>}
           {isLog && <Link to="/"><Button onClick={() => {localStorage.removeItem('token'); isLogin()}}>logOut</Button></Link>}
           {!isLog && <Link to="/"><Button color="inherit" >Login</Button></Link>}
         </Toolbar>
