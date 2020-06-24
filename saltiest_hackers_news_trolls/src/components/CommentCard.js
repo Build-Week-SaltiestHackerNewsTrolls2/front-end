@@ -1,14 +1,11 @@
 import React from "react";
 import { Card, Button } from "@material-ui/core";
-import axiosWithAuth from "../utils/axiosWithAuth";
 
 
-const CommentCard = ({comment}) => {
-  const addComment = () => {
-    return(
-      axiosWithAuth.post('', comment)
-    )
-  }
+
+const CommentCard = ({comment, addComment}) => {
+  const id = localStorage.getItem('user_id')
+  
   console.log()
   return(
     <Card min-width="sm">
@@ -16,7 +13,7 @@ const CommentCard = ({comment}) => {
       <span>{comment.comment}</span>
       <h4>Score</h4>
       <p>{comment.score}</p>
-      <Button variant="contained" onClick={() => addComment()}>Save</Button>
+      <Button variant="contained" onClick={() => addComment(id, {newUser_id: id, comment: JSON.stringify(comment.comment), name: 'fakeName'})}>Save</Button>
     </Card>
   )
 }

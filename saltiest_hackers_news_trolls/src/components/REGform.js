@@ -13,6 +13,7 @@ const REGForm = props => {
         password: '',
         country: ''
     });
+    const id = localStorage.getItem('user_id')
     const [country, setCountry] = useState([]);
     const history = useHistory()
     useEffect(() => {
@@ -38,9 +39,9 @@ const REGForm = props => {
               .post('/auth/register', formData)
               .then(res => {
                 localStorage.setItem('token', res.data.token);
-                localStorage.setItem('user_id', res.data.user_id);
+                localStorage.setItem('user_id', res.data.newUser_id);
                 console.log("This is your post data", res.data)
-                history.push("/commentList")
+                history.push(`/CommentList/${id}`)
                 props.isLogin()
               })
               .catch(err => console.log('This is your post error', err.message))

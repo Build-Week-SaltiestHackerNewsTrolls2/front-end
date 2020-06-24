@@ -14,6 +14,7 @@ const initinalUser={
 const Login = (props) => {
 const [user, setUser] = useState(initinalUser)
 const history = useHistory()
+const id = localStorage.getItem('user_id')
 
 const handleChange = e => {
   setUser({
@@ -28,8 +29,8 @@ const handleSubmit = e => {
     .post("/auth/login", user)
     .then(res => {
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user_id', res.data.user_id);
-      history.push("/commentList")
+      localStorage.setItem('user_id', res.data.newUser_id);
+      history.push(`/commentList/${id}`)
       console.log(res);
       props.isLogin()
     })
