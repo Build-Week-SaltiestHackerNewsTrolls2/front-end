@@ -37,7 +37,7 @@ export default function ButtonAppBar({isLogin, isLog}) {
             Troll Hub
           </Typography>
           {isLog && <Link to={`/SavedComments/${id}`}><Button>Saved Comments</Button></Link>}
-          {isLog && <Link to="/"><Button onClick={() => {localStorage.removeItem('token'); isLogin()}}>logOut</Button></Link>}
+          {isLog && <Link to="/"><Button onClick={() => {localStorage.removeItem('token'); localStorage.removeItem('user_id'); isLogin()}}>logOut</Button></Link>}
           {!isLog && <Link to="/"><Button color="inherit" >Login</Button></Link>}
         </Toolbar>
       </AppBar>

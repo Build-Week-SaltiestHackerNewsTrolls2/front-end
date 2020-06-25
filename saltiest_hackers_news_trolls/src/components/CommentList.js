@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { CommentContext } from "../contexts/CommentContext";
 import CommentCard from "./CommentCard"
 import axiosWithAuth from "../utils/axiosWithAuth";
+// import SearchBar from "./SearchBar.js";
 
 
 
@@ -15,7 +16,7 @@ const CommentList = () => {
 }
   return(
     <div>
-      List of Comments
+      {/* <SearchBar /> */}
       {comments.map(comment => {
         return(
           <CommentCard key={comment.id} id={comment.id} comment={comment} addComment={addComment} />

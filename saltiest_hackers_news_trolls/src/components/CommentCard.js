@@ -13,7 +13,9 @@ const CommentCard = ({comment, addComment}) => {
       <span>{comment.comment}</span>
       <h4>Score</h4>
       <p>{comment.score}</p>
-      <Button variant="contained" onClick={() => addComment(id, {newUser_id: id, comment: JSON.stringify(comment.comment), name: 'fakeName'})}>Save</Button>
+      <Button variant="contained" onClick={() => {
+        addComment(id, {newUser_id: id, comment: comment.comment, username: comment.name})
+        }}>Save</Button>
     </Card>
   )
 }
