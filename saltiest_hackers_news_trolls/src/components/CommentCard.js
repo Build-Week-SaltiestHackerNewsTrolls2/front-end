@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "@material-ui/core";
+import { Card, Button, Container } from "@material-ui/core";
 
 
 
@@ -8,15 +8,17 @@ const CommentCard = ({comment, addComment}) => {
   
   console.log()
   return(
+    <Container>
     <Card min-width="sm">
       <h3>Comment</h3>
-      <span>{comment.comment}</span>
+      <span>{comment.Comment}</span>
       <h4>Score</h4>
-      <p>{comment.score}</p>
+      <p>{comment.Saltiness}</p>
       <Button variant="contained" onClick={() => {
         addComment(id, {newUser_id: id, comment: comment.comment, username: comment.name})
         }}>Save</Button>
     </Card>
+    </Container>
   )
 }
 

@@ -8,20 +8,28 @@ import CommentList from "./components/CommentList";
 import {CommentContext} from "./contexts/CommentContext.js";
 import axiosWithAuth from './utils/axiosWithAuth';
 import ButtonAppBar from './components/ButtonAppBar';
-
+import {UserContext} from "./contexts/UserContext"
 import SavedComments from './components/SavedComments';
+import {UsersContext} from './contexts/UsersContext';
 
 function App() {
   const [comments, setComments] = useState([])
   const [isLog, setIsLog] = useState(false)
-  const fetchComments = () => {
+  const [user, setUser] = useState('zokier')
+  const [users, setUsers] = useState([{username: 'zokier'}])
+  const select = {user, setUser}
+  const fetchComments = (u) => {
     axiosWithAuth()
-      .get('https://my.api.mockaroo.com/comments.json?key=20889c20')
+      .get(`comments/user_comments/${u}`)
       .then(res => {
         setComments(res.data)
         console.log(res.data)
       })
-
+  }
+  const getUsers = () => {
+    axiosWithAuth().get('/comments')
+      .then(res => {setUsers(res.data); console.log(res.data); console.log(users)})
+      .catch(err => console.log(err.message))
   }
 
   const isLogin = () => {
@@ -32,13 +40,17 @@ function App() {
     
   
 }
+console.log("user state", user)
 
   useEffect(() => {
-    fetchComments()
-  }, [])
+    fetchComments(user);
+    getUsers();
+  }, [user])
 
   return (
     <CommentContext.Provider value={comments}>
+      <UserContext.Provider value={select}>
+        <UsersContext.Provider value={users}>
       <div className="App">
         <ButtonAppBar isLogin={isLogin} isLog={isLog} />
           <Switch>
@@ -52,6 +64,8 @@ function App() {
             </Route>
           </Switch>
       </div>
+      </UsersContext.Provider>
+      </UserContext.Provider>
     </CommentContext.Provider>
   );
 }
