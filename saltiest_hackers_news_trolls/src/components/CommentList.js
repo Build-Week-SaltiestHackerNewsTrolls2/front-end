@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { CommentContext } from "../contexts/CommentContext";
 import CommentCard from "./CommentCard"
 import axiosWithAuth from "../utils/axiosWithAuth";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar.js";
 
 
 
