@@ -15,12 +15,12 @@ const SavedComments =  () => {
   // }
 
   useEffect(() => {
+  
     axiosWithAuth().get(`newUser/${id}/favorites`)
       .then(res => {
         console.log(res.data)
         setSaved(res.data)
       })
-
     // fetchSaved()
   }, [id])
 

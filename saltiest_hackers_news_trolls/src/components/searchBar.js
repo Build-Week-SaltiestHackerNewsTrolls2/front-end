@@ -3,19 +3,19 @@ import axios from 'axios';
 import { Input } from 'reactstrap';
 import { CommentContext } from '../contexts/CommentContext';
 
-const SearchBar = () => {
+const SearchBar = ({setFiltered}) => {
     
     const [search, setSearch] = useState({
         search:''
     })
-    const comment = useContext(CommentContext)
+    const {comment} = useContext(CommentContext)
 
     useEffect(() => {
 
-            const initial = comment
-            const filtered = initial.filter( () => {
+            // const initial = comment
+            const filtered = comment.filter( () => {
             return comment.name.toLowerCase().includes(search.name.toLowerCase()) || comment.comment.toLowerCase().includes(search.name.toLowerCase())})
-            setSearch(filtered)
+            setFiltered(filtered)
         
     }, [search, comment])
 
