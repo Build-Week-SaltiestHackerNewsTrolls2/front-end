@@ -8,8 +8,8 @@ import CommentList from "./components/CommentList";
 import {CommentContext} from "./contexts/CommentContext.js";
 import axiosWithAuth from './utils/axiosWithAuth';
 import ButtonAppBar from './components/ButtonAppBar';
-import {UserContext} from './contexts/UserContext.js'
-import searchBar from './components/searchBar'
+// import SearchBar from './components/SearchBar';
+import SavedComments from './components/SavedComments';
 
 function App() {
   const [comments, setComments] = useState([])
