@@ -8,7 +8,7 @@ import CommentList from "./components/CommentList";
 import {CommentContext} from "./contexts/CommentContext.js";
 import axiosWithAuth from './utils/axiosWithAuth';
 import ButtonAppBar from './components/ButtonAppBar';
-// import SearchBar from './components/SearchBar';
+
 import SavedComments from './components/SavedComments';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   const [isLog, setIsLog] = useState(false)
   const fetchComments = () => {
     axiosWithAuth()
-      .get('https://my.api.mockaroo.com/comments?key=20889c20')
+      .get('https://my.api.mockaroo.com/comments.json?key=20889c20')
       .then(res => {
         setComments(res.data)
         console.log(res.data)
