@@ -25,8 +25,8 @@ console.log(users);
   return(
     <div>
       <select value={user} name="user" onChange={e => setUser( e.target.value )}>
-        {users.map(u => {
-          return <option value={u.Username}>{u.Username}</option>
+        {users.map((u, i) => {
+          return <option key={i} value={u.Username}>{u.Username}</option>
           
         })}
       </select>
