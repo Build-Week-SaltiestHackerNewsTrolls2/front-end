@@ -14,7 +14,7 @@ const SearchBar = ({setFiltered}) => {
 
             // const initial = comment
             const filtered = comment.filter( () => {
-            return comment.name.toLowerCase().includes(search.name.toLowerCase()) || comment.comment.toLowerCase().includes(search.name.toLowerCase())})
+            return comment.Username.toLowerCase().includes(search.name.toLowerCase()) || comment.Comment.toLowerCase().includes(search.name.toLowerCase())})
             setFiltered(filtered)
         
     }, [search, comment])
