@@ -45,7 +45,7 @@ console.log("user state", user)
   useEffect(() => {
     fetchComments(user);
     getUsers();
-  }, [user])
+  }, [user, isLog])
 
   return (
     <CommentContext.Provider value={comments}>

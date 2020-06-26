@@ -15,7 +15,7 @@ const CommentCard = ({comment, addComment}) => {
       <h4>Score</h4>
       <p>{comment.Saltiness}</p>
       <Button variant="contained" onClick={() => {
-        addComment(id, {newUser_id: id, comment: comment.comment, username: comment.name})
+        addComment(id, {newUser_id: id, comment: comment.Comment, username: comment.Username})
         }}>Save</Button>
     </Card>
     </Container>
