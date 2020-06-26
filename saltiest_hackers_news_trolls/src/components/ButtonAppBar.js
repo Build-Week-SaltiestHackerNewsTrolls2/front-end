@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    paddingLeft: theme.spacing(10),
   },
 }));
 
@@ -30,9 +31,9 @@ export default function ButtonAppBar({isLogin, isLog}) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
             {/* <MenuIcon /> */}
-          </IconButton>
+          {/* </IconButton> */}
           <Typography variant="h6" className={classes.title}>
             Troll Hub
           </Typography>
