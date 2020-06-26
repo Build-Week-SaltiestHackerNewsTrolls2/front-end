@@ -41,7 +41,7 @@ const REGForm = props => {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('user_id', res.data.newUser_id);
                 console.log("This is your post data", res.data)
-                history.push(`/CommentList/${id}`)
+                history.push(`/CommentList/${res.data.newUser_id}`)
                 props.isLogin()
               })
               .catch(err => console.log('This is your post error', err.message))

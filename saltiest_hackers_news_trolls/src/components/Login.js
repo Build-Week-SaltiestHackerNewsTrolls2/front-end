@@ -30,7 +30,7 @@ const handleSubmit = e => {
     .then(res => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user_id', res.data.newUser_id);
-      history.push(`/commentList/${id}`)
+      history.push(`/commentList/${res.data.newUser_id}`)
       console.log(res);
       props.isLogin()
     })
