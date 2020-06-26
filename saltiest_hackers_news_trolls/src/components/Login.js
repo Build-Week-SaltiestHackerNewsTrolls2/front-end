@@ -41,7 +41,7 @@ const handleSubmit = e => {
   return(
     <Container maxWidth="sm">
     <div className="loginContainer">
-      {localStorage.getItem("token") && history.push(`/commentList${id}`)}
+      {localStorage.getItem("token") && history.push(`/commentList/${id}`)}
       <Paper>
         <label>Login</label>
       <form onSubmit={handleSubmit}>
