@@ -3,7 +3,7 @@ import { Card, Form, FormGroup, Input, Button} from 'reactstrap'
 import axios from 'axios'
 import * as yup from 'yup'
 import axiosWithAuth from '../utils/axiosWithAuth'
-import { useHistory } from 'react-router-dom'
+import {history} from '../index'
 
 const REGForm = props => {
     const [formData, setformData] = useState({
@@ -11,11 +11,11 @@ const REGForm = props => {
         lastName: '',
         email: '',
         password: '',
-        country: ''
+        country: 'Afghanistan'
     });
     const id = localStorage.getItem('user_id')
     const [country, setCountry] = useState([]);
-    const history = useHistory()
+    
     useEffect(() => {
         axios
             .get(`https://restcountries.eu/rest/v2/all`)
@@ -30,7 +30,8 @@ const REGForm = props => {
         firstName: yup.string().required(),
         lastName: yup.string().required(),
         email: yup.string().required(),
-        password: yup.string().required()
+        password: yup.string().required(),
+        country: yup.string().required()
     })
 
     const submit = () => {
@@ -49,7 +50,10 @@ const REGForm = props => {
     }
 
     const handleChange = (e) => {
+        return(
+        e.preventDefault(),
         setformData({...formData, [e.target.name]: e.target.value})
+        )
     }
     return(
         <>
@@ -85,12 +89,14 @@ const REGForm = props => {
                     </FormGroup>
 
                 
-                
-                <select name="country" value={formData.country} onChange={handleChange} >
+                <FormGroup>
+                <legend>Country</legend>
+                <Input type='select' name="country" value={formData.country} onChange={handleChange} >
                     {country.map((country, i) => {
                         return <option key={i} value={country.name}>{country.name}</option>
                         })}
-                </select>
+                </Input>
+                </FormGroup>
                 
             
 

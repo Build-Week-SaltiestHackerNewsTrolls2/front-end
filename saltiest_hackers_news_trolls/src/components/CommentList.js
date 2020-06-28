@@ -13,8 +13,9 @@ const CommentList = () => {
   const {user, setUser} = useContext(UserContext)
   const users = useContext(UsersContext)
   const [filtered, setFiltered] = useState('')
-  const addComment = (id, comment) => {
-    axiosWithAuth().post(`/favorites`, comment)
+  const addComment = (id,comment) => {
+    axiosWithAuth()
+      .post('/favorites', comment )
       .then(res => console.log(res.data))
       .catch(err => console.log(err.message))
   
@@ -34,11 +35,11 @@ console.log(users);
       {/* <SearchBar setFiltered={setFiltered} /> */}
       {filtered.length !== 0 && filtered.map((comment, i) => {
         return(
-          <CommentCard key={i} id={comment.id} comment={comment} addComment={addComment} />
+          <CommentCard key={i} id={comment.id} comment={comment} addComment={addComment}/>
       )})}
       {filtered.length === 0 && comments.map((comment, i) => {
         return(
-          <CommentCard key={i} id={comment.id} comment={comment} addComment={addComment} />
+          <CommentCard key={i} id={comment.id} comment={comment}  addComment={addComment}  />
       )})}
     </div>
     
