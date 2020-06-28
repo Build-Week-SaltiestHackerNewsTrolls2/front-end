@@ -6,6 +6,10 @@ import { Card, Button, Container } from "@material-ui/core";
 const CommentCard = ({comment, addComment}) => {
   const id = localStorage.getItem('user_id')
   
+
+
+
+  
   console.log()
   return(
     <Container>
@@ -15,7 +19,7 @@ const CommentCard = ({comment, addComment}) => {
       <h4>Score</h4>
       <p>{comment.Saltiness}</p>
       <Button variant="contained" onClick={() => {
-        addComment(id, {newUser_id: id, comment: comment.Comment, username: comment.Username, score: comment.Saltiness})
+        addComment(id,{newUser_id:id, comment: comment.Comment, username: comment.Username, score: comment.Saltiness})
         }}>Save</Button>
     </Card>
     </Container>
